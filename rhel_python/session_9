@@ -1,0 +1,32 @@
+Session 9
+
+List - Operate in list column wise, not supported by default. Like row wise/ item wise.
+
+array()
+convert list to array -> array(list_name)
+
+MLOps
+
+import numpy
+
+Module comes from Library
+
+
+Functions/Options comes from Modules/Program Files, and they come from Library
+
+
+We install Library
+Library contains multiple modules and modules contains several functions
+
+pip list -> lists all the installed libraries.
+
+a[:,1]
+a[:1,3] Column from 1-3 (3 is excluded)
+
+I/O Redirection
+2 output
+1 -> Expected Output
+2 -> Exit Code
+echo $?
+
+

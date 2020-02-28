@@ -1,0 +1,33 @@
+Session 10
+
+wc - word count
+
+wc < fileToReadFrom.txt
+
+Program to replace the EOF
+Read all the data from HDD
+
+wc - l --> line
+wc -w --> words
+wc -c --> count
+
+rpm -qa | wc -l
+
+
+rpm -qa | grep python
+
+rpm -qa | grep python | wc -l
+
+MapReduce
+
+
+grep ^d
+ls -l | grep ^d | wc -l
+
+grep -n (lineNo) linux world file1.txt
+grep -v (reverse|negect) linux file1.txt
+
+date | tee | file.txt
+date | tee | wc -l
+
+

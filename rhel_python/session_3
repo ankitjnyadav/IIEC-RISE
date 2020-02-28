@@ -1,0 +1,31 @@
+Session 3
+
+Networking
+Network is just a type of signal
+Either wired or wireless
+
+SIM - IP Address
+RRT
+Round Trip Time
+Ping to check basic networking
+
+IP is not 4octet
+it is 4byte
+
+name to central sever (DNS) resolves name and point to IP addressr
+
+192.168.0.1
+Convert to Binary - Becomes 32 bits
+Convert it to Decimal - 1 Octet
+
+bc - binary calculator on terminal
+
+Name:	www.google.com
+Address: 216.239.34.117
+
+216*2^24+239*2^16+34*2^8+117*2^0
+https://3639550581
+
+black proxy - it will work
+white proxy - allow limited IPs
+

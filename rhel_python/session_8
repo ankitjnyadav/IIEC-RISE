@@ -1,0 +1,25 @@
+Session 8
+
+Package Management
+
+RPM- Redhat Package management
+
+Check Program Path
+which firefox
+
+rpm -q -f /usr/bin/firefox
+
+Install, Uninstall Program using rpm
+
+Applications are in - AppStream and BaseOS
+
+ls fire<tab> to autocomplete
+
+-i  -->  install
+-v --> verbose mode
+not all commands supports it
+-h --> ## progress bar
+
+
+eog --> opens the file (to open image)
+

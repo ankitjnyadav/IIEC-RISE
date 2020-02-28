@@ -1,0 +1,23 @@
+Session 6
+
+Python - Data Type Inference
+: -> Slicing 
+string_x [start(included) : end(excluded) : jump/step]
+
+Reverse the string
+x_string [-1::-1]
+
+Meaning of "-" and '-' is same
+but in most of programming lang "" parses special chars/ escape chars and '' and doesnt 
+
+In Py if you dont want to parse special char
+use x = r'String of your choice'
+
+interpolation: The insertion of something of a different nature into something else.
+x = "Redhat IIEC Python training"
+"Python" in x
+>>> True
+
+Tuple - () - readonly - Immutable 
+List - [] - Rewritable - Mutable a
+

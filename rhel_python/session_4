@@ -1,0 +1,47 @@
+Session 4
+
+CLI vs GUI
+CLI is more powerful than GUI 
+provides more computations 
+
+Code/Program 
+Harddisk - Storage - Program
+RAM - Memory - Process
+
+ps -aux 
+ps -aux | grep process_name
+kill process_id
+
+
+mkdir /folderName
+cd /folderName
+ls
+
+gedit file.txt
+cat file.txt - to check the file conten
+
+
+cat > file2.txt
+Enter the Data
+crt+d
+
+touch fileName2.txt
+
+
+Python
+---------
+
+Need of programming lang?
+To interact with OS 
+it acts as mediator between user and operating system
+
+Py Prompt - REPL
+Python REPL - >>>
+R- Read
+E- Evaluate
+P- Print
+L- Loop
+
+>>>import os
+os.system('date')
+

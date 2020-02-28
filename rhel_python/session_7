@@ -1,0 +1,43 @@
+Session 7
+
+Nested List | List of List
+[["Vimal",898989],["Jack",789546],["Maa",31546]]
+
+I/O Redirection & Piping
+
+Redirection - internally bash asks for the device where it needs to send the output
+'>' is used by Shell and it is redirection symbol.da
+ Screen -> STDOUT
+
+> - Checks if file is present or not. If not creates. It is feature of BASH
+ 
+Output Redirection
+> - Overwrite
+>> - Append
+
+Input Redirection
+< - Overwrite
+<< - Append
+
+tr 'a-z' 'A'Z' | tr is translator
+
+EOL - ENTER
+EOF - Crtl+D
+
+I/O Redirection Example -
+ay@Neelkanth:~$ cat test349.txt 
+Tue Feb 18 22:01:59 IST 2020
+ay@Neelkanth:~$ date > test349.txt
+ay@Neelkanth:~$ cat test349.txt 
+Tue Feb 18 22:19:57 IST 2020
+ay@Neelkanth:~$ tr 'a-z' 'A-Z' < test349.txt 
+TUE FEB 18 22:19:57 IST 2020
+
+cat cmd - 1. needs input 2. Prints the String/Data provided as i/p
+ay@Neelkanth:~$ cat < test349.txt 
+Tue Feb 18 22:19:57 IST 2020
+ay@Neelkanth:~$ cat   test349.txt 
+Tue Feb 18 22:19:57 IST 2020
+
+
+

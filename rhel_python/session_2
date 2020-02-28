@@ -1,0 +1,18 @@
+Session 2
+
+1. RedHat Installation
+
+2. Crt + C - Closes the program unlike Ctrl+Z
+3. Crt + Z - paused in background
+# fg programID
+# Crtl+Z to put in background
+ 
+firefox &
+To run program in background state
+
+To remove newline from echo, use
+echo "Hello" -n
+echo -e -n "hello\b"
+Learnt how to create unique live time/clock.
+
+
