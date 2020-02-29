@@ -1,0 +1,38 @@
+Session 13
+
+package management
+rpm - yum
+
+
+rpm - i = yum install
+
+
+dependencies
+
+
+yum search for package anywhere and install it.
+Resolves dependencies automatically.
+
+configuration files - one place for all configurations
+yum has its own config file
+
+/etc/yum.repos.d/
+
+file:// => file protocol
+gpgcheck=0 => disabled; to check digital signature of the software
+extension should be .repo
+
+
+Test your config - > yum repolist
+
+yum ins heavy
+yum breaks, performance concerns
+
+dnf is more stable
+
+wget download and install file from URL
+
+fusion is alternate to wget
+
+
+dnf list vlc
