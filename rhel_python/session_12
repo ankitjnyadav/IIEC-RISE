@@ -12,3 +12,5 @@ How create personal network lab/lan
 
 CPU + RAM - Compute Unit
 HDD- Storage Unit
+
+ssh -x 192.168.0.13 firefox
