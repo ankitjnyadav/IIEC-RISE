@@ -1,0 +1,26 @@
+Server - is a time of a program which provides services
+Client - typically is a program which takes services
+
+if SSH permission provided
+one can run any command though this can be restricted
+
+Protocol is like grammar both should use the same to understand the communication
+
+Create Server in 3 Steps
+1 Install (Software)
+2 Setup (Look and feel)
+3 Execute
+
+For VLC
+We are configuring the web server
+Will be configuring/setup not creating
+
+Configure Apache Web Server | HTTPD
+
+Putting your website under Web Server is Web Hosting
+
+-------------------------------------
+systemcyl start httpd
+
+Newtowrk Security Card is known as Firwell
+
