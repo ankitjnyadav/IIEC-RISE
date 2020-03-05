@@ -12,3 +12,13 @@ A server can also act as client, as server resides in the same system
 curl http://192.168.255.255/myFileName.html
 
 Port no: It is just unique ID of server
+
+ps -aux -> all the programs/processes running in the os
+netstat ->
+netstat -tnlp
+
+Webserver port no :80
+Then actually URL --> http://192.168.255.255:80/myFileName.html
+
+Change the port no. for webserver
+When we change something in config file we restart
