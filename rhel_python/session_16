@@ -1,0 +1,16 @@
+Programs running behind the scenes are called Daemons
+
+To debug failure cause, command that can be used is: journalctl -xe
+
+
+ Security Enhanced Linux - developed by NSA
+ Biggest security in the terms of service level file level security
+
+ SE Linux hold port no. associated with diff servers in its DB.
+ Webserver must use 80
+
+
+getenforce - to get the status of SE Linux
+setenforce - 1/0 - to enable or disable the SE Linux
+
+nmap used to scap IPs and Port no.s to identify active ports
