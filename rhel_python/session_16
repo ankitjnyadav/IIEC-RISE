@@ -14,3 +14,13 @@ getenforce - to get the status of SE Linux
 setenforce - 1/0 - to enable or disable the SE Linux
 
 nmap used to scap IPs and Port no.s to identify active ports
+
+Use case to change the port no. -
+In order to avoid any port no conflicts
+
+Priority are given to user config files sotred in the 'include files' folder
+
+How to change the document root path for the Webserver
+
+By default homepage is index.html
+It is predefined
