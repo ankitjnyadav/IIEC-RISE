@@ -1,10 +1,159 @@
-Terminologies
-Vagrant
-Virtual Env - Python
+Docker Hub - is docker public repository/registry
+docker run -t -i centos:7
+-i -> is for interactive mode
 
-yum --nobest option to install docker
+--------------------------------------------------------------------------------------
+If you want to run docker as non-root user then you need to add it to the docker group.
+--------------------------------------------------------------------------------------
+Create the docker group if it does not exist
+--------------------------------------------------------------------------------------
+    $ sudo groupadd docker
+--------------------------------------------------------------------------------------
+Add your user to the docker group.
+--------------------------------------------------------------------------------------
+    $ sudo usermod -aG docker $USER
+--------------------------------------------------------------------------------------
+Run the following command or Logout and login again and run (that doesn't work you may need to reboot your machine first)
+--------------------------------------------------------------------------------------
+    $ newgrp docker
+--------------------------------------------------------------------------------------
+Check if docker can be run without root
+--------------------------------------------------------------------------------------
+    $ docker run hello-world
+--------------------------------------------------------------------------------------
 
-installation of docker
+free -m -> How much ram is free
+watch -n 1 free -m
+watch -n 1 -> watch every 1 second
 
-systemctl command
+docker ps -a
+All the docker processes which were active
 
+to exit from centos - container --> exit
+
+docker run -it --name aycontainer centos
+to give our own name
+
+docker stop aycontainer  --> stops the container
+docker start aycontainer  --> starts the container
+docker attach aycontainer  --> Takes inside the container
+
+
+centos is downstream os of RedHat
+--------------------------------------------------------------------------------------
+What does Upstream and Downstream mean?
+--------------------------------------------------------------------------------------
+From the perspective a Linux distributor upstream usually refers to the original author(s) of the source for a particular package.
+Downstream may refer to a distribution that has forked/branched from the perspective of the distro you are looking at.
+
+So if Debian receives a bug relating to Apache, then package maintainer or anyone reading the bugs may do some investigation.
+If they determine the bug is in the original source code, and not cause by something unique to the distribution they will work with the upstream authors to work on fixing the bug in program.
+
+If the upstream developer is uncooperative or no longer exists then the developer may add a patch that applies to the package,
+effectively forking to a certain extent from the upstream development.
+
+Once the bug is found they may work with the downstream distros like Ubuntu to make sure the bug is fixed everywhere.
+Downstream maintainers may submit issues related to things having to do with the packaging or any patches added.
+
+If you are working on something like Mint which is based on Ubuntu, which is based on Debian the term upstream could mean any one of the maintainers between the current distro,
+or it could refer to the original author(s). When maintainers and author(s) of a particular package are working well together usually all of them will be subscribed to similar maillists,
+and bugtrackers and anyone with some responsibility for a given package will be notified in some form about bugs and new patches made at any level.
+--------------------------------------------------------------------------------------
+to check the YUM config list
+cd /etc/yum.repos.d/
+ls
+
+will list all the yum conig
+
+
+Is data inside container temporary ?
+No, Whenever we docker run --> creates new container, hence new storage allocation will be allocated
+Data is permanently stored in one container
+Open the same container to find your data
+
+
+docker rm containerID
+removes container permanently and will incur data loss.
+--------------------------------------------------------------------------------------------
+ay@Neelkanth:~$ sudo docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+centos              latest              470671670cac        7 weeks ago         237MB
+--------------------------------------------------------------------------------------------
+ay@Neelkanth:~$ docker rmi centos:latest
+Error response from daemon: conflict: unable to remove repository reference "centos:latest" (must force) - container 56d7983b9253 is using its referenced image 470671670cac
+--------------------------------------------------------------------------------------------
+ay@Neelkanth:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+ay@Neelkanth:~$ docker container ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+ay@Neelkanth:~$ docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+ay@Neelkanth:~$
+----------------------------------------------------------------------------------------
+ay@Neelkanth:~$ docker container run -it --name os2 centos
+[root@2cd37f87d313 /]# exit
+----------------------------------------------------------------------------------------
+docker container stop os2
+
+sudo docker container rm conatinerID
+
+
+ay@Neelkanth:/$ date
+Sat Mar  7 11:56:26 IST 2020
+ay@Neelkanth:/$ echo $(date)
+Sat Mar 7 11:56:32 IST 2020
+
+ay@Neelkanth:/$ sudo docker container ls -a
+[sudo] password for ay:
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                        PORTS               NAMES
+2cd37f87d313        centos              "/bin/bash"         8 minutes ago       Exited (0) 8 minutes ago                          os2
+86ddb8a52ef1        centos              "/bin/bash"         2 hours ago         Exited (127) 42 minutes ago                       aycontainer
+
+Returns only IDs of container
+ay@Neelkanth:/$ sudo docker container ls -a -q
+2cd37f87d313
+86ddb8a52ef1
+--------------------------------------------------------------------------------------
+ay@Neelkanth:/$ sudo docker container rm $(sudo docker container ls -a -q)
+2cd37f87d313
+86ddb8a52ef1
+--------------------------------------------------------------------------------------
+ay@Neelkanth:/$ sudo docker container rm -f $(sudo docker container ls -a -q)
+2cd37f87d313
+86ddb8a52ef1
+--------------------------------------------------------------------------------------
+To comeout from running container that is attached to base OS terminal
+To deattach --> Ctl+p+q
+--------------------------------------------------------------------------------------
+Why do we require OS ?
+Basically to run a program/process.
+--------------------------------------------------------------------------------------
+ay@Neelkanth:/$ sudo docker run -it --name myos centos date
+Sat Mar  7 06:43:58 UTC 2020
+ay@Neelkanth:/$ sudo docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
+15b748589880        centos              "date"              8 seconds ago       Exited (0) 7 seconds ago                       myos
+60b3a4574326        centos              "/bin/bash"         10 minutes ago      Up 10 minutes                                  os1
+ay@Neelkanth:/$
+--------------------------------------------------------------------------------------
+ay@Neelkanth:/$ sudo docker run -it --name testContainer --rm centos date
+Sat Mar  7 06:48:00 UTC 2020
+ay@Neelkanth:/$ sudo docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+ay@Neelkanth:/$
+--------------------------------------------------------------------------------------
+How to create our own Docker Image?
+Image is like bootable ISO/DVD
+
+Two ways
+1. commit
+2. Dockerfile
+--------------------------------------------------------------------------------------
+ay@Neelkanth:/$ sudo docker commit my1 newimagenew:v1
+sha256:d618ee0b91a660cfb0dbe42db0686fba313d5fc9259457571af05046f2ba9360
+--------------------------------------------------------------------------------------
+ay@Neelkanth:/$ sudo docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+newimagenew         v1                  d618ee0b91a6        9 seconds ago       238MB
+centos
+--------------------------------------------------------------------------------------
