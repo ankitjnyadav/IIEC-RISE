@@ -1,0 +1,28 @@
+To inspect a container: (A detailed info about the container)
+docker container inspect web
+
+Inorder to extract only specified data, can use:
+docker container --format {KeyName}  containername
+
+ docker container inspect --format "{{.NetworkSettings.IPAdress}}" web
+
+systemctl wont work inside docker
+but this can be changed/modified/'
+
+How to run services without systemctl
+how to indentify which services are being called
+
+
+Docker just provides u with the os/container
+further steps must be known by us.
+
+
+At the time of docker launch
+vi /root/.bashrc
+
+
+where are PID stored
+cd /var/run/httpd/
+ls
+cat httpd.pid
+
