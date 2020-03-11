@@ -75,4 +75,7 @@ vimal13/webserver        v1                  bb387c07526e        3 days ago     
 centos                   latest              470671670cac        7 weeks ago         237MB
 centos                   7                   5e35e350aded        4 months ago        203MB
 -----------------------------------------------------
-
+in case of newtork issue
+docker network ls
+docker run -it --network bridge centos
+-----------------------------------------------------
