@@ -1,0 +1,38 @@
+---------------------
+RISE ID: 2020.41.2.1
+---------------------
+
+How to print data from clipboard
+xclip -o
+--
+
+Remote Execution (using networking)
+Remote Program Execution Sever
+
+sudo apt-get install openssh-server
+vi /etc/ssh/ssh_config
+
+Already running .. Preconfigured in several distributions
+--------------------------------------------------
+ay@Neelkanth:/$ systemctl status sshd
+● ssh.service - OpenBSD Secure Shell server
+   Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
+   Active: active (running) since Thu 2020-03-12 22:14:47 IST; 2min 32s ago
+ Main PID: 10541 (sshd)
+    Tasks: 1 (limit: 4915)
+   CGroup: /system.slice/ssh.service
+           └─10541 /usr/sbin/sshd -D
+
+Mar 12 22:14:47 Neelkanth systemd[1]: Starting OpenBSD Secure Shell server...
+Mar 12 22:14:47 Neelkanth sshd[10541]: Server listening on 0.0.0.0 port 22.
+Mar 12 22:14:47 Neelkanth sshd[10541]: Server listening on :: port 22.
+Mar 12 22:14:47 Neelkanth systemd[1]: Started OpenBSD Secure Shell server.
+-------------------------------------------------------
+How to connect from B(client) to A(server).
+
+yum install openssh-clients
+
+ssh -X
+-X is X11 (Graphical) forwarding
+
+

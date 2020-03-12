@@ -26,3 +26,56 @@ cd /var/run/httpd/
 ls
 cat httpd.pid
 
+
+Share os (Env)
+1. Using export and Import
+    Export -> docker save webserver:v1 -o web.tar
+    Transfer -> scp web.tar root@192.168.0.124:/root
+    Import -> docker load -i web.tar
+2. Putting container into Repo/Registry
+    Push -> docker push ankitjnyadav/webserver:v1
+
+-----------------------------------------------------
+ay@Neelkanth:/$ docker push webserver:v1
+The push refers to repository [docker.io/library/webserver]
+fc9c42c44dec: Preparing
+0683de282177: Preparing
+denied: requested access to the resource is denied
+-----------------------------------------------------
+This is not official image hence failed.
+Inorder to upload any custom image syntax of image name should be username/imagename:ifanyversion
+-----------------------------------------------------
+To change the Image name:
+docker tag webserver:v1 ankitjnyadav/webserver:v1
+-----------------------------------------------------
+ay@Neelkanth:/$ docker push ankitjnyadav/webserver:v1
+The push refers to repository [docker.io/ankitjnyadav/webserver]
+fc9c42c44dec: Pushing [=====================>                             ]   20.2MB/45.98MB
+0683de282177: Pushing [===========>                                       ]  53.22MB/237.1MB
+-----------------------------------------------------
+ay@Neelkanth:/$ docker push ankitjnyadav/webserver:v1
+The push refers to repository [docker.io/ankitjnyadav/webserver]
+fc9c42c44dec: Pushed
+0683de282177: Pushed
+v1: digest: sha256:9e845e754ec4e8c26d6f901c7ea22ddacb08cbc72d13746f49084e18d97b453b size: 741
+-----------------------------------------------------
+ay@Neelkanth:/$ docker pull vimal13/webserver:v1
+v1: Pulling from vimal13/webserver
+ab5ef0e58194: Already exists
+6de39f9cea70: Pull complete
+Digest: sha256:67791e3e7de4f2cdbdf29df2c4dd46d35f7f712d0488f662f80498a2aeacbabb
+Status: Downloaded newer image for vimal13/webserver:v1
+docker.io/vimal13/webserver:v1
+-----------------------------------------------------
+ay@Neelkanth:/$ docker image ls
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+ankitjnyadav/webserver   v1                  7ffc32611d6c        24 hours ago        283MB
+webserver                v1                  7ffc32611d6c        24 hours ago        283MB
+vimal13/webserver        v1                  bb387c07526e        3 days ago          343MB
+centos                   latest              470671670cac        7 weeks ago         237MB
+centos                   7                   5e35e350aded        4 months ago        203MB
+-----------------------------------------------------
+in case of newtork issue
+docker network ls
+docker run -it --network bridge centos
+-----------------------------------------------------
