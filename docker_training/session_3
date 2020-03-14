@@ -1,3 +1,23 @@
 ---------------------
 RISE ID: 2020.41.2.1
 ---------------------
+
+docker images ls | grep centos
+docker ps -a
+To clean the environment docker rm -f $(docker ps -a -q)
+
+To see whats happening inside a container
+docker logs {containerName/ID}
+
+To come out of a container (not closing the container) --> Crt+p+q
+
+To get a live view of container without going inside or attaching the container
+docker logs -f c1
+(Ctl + c to stop)
+
+Automation is moving towards --> DevOps --> Ansible | Pupet
+
+To run the command inside the container and come out:
+docker exec c1 date
+docker exec -it c1 bash (In this manner we can use the container and wont be exiting from it)
+i.e Container wont be shut down
