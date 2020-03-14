@@ -1,0 +1,83 @@
+---------------------
+RISE ID: 2020.41.2.1
+---------------------
+
+Linux Networking Basics
+
+In order to have connectivity between two machines
+(Basic Network Checklist)
+1.  O.S
+2.  NIC
+3.  IPv4
+4.  IP of A&B are in the same network
+5.  Physical Connectivity
+6.  IP - Private    NAT
+         Public
+
+What is Network Name ?
+Eg 192.168.2.57
+
+1-126       Class A     First Octet for Network Name
+128-191     Class B     Till Second Octet for Network Name
+192-223     Class C     Till Third  Octet for Network Name
+224-255     Class D     Till Fourth Octet for Network Name
+
+############  In Practical world Network name "CANNOT BE FOUND" using the Class Name  ############
+
+This is theortical knowledge
+Netmask is the only way, we can find the network name.
+For Eg:  inet 192.168.0.113  netmask 255.255.255.0
+
+Why we require network name?
+A - 192.168.1.2     255.255.0.0
+B - 192.168.5.2     255.255.0.0
+Network name is same hence we can use the Switch
+
+A - 192.168.1.2     255.255.255.0
+B - 192.168.5.2     255.255.0.0
+Network name is different hence we can use the Router
+
+192.168.1.2
+255.255.255.0
+
+IP - 11000000 ------------
+NM - 11111111 ------------
+Logical AND Operation
+NN- 11000000 ------------
+In Decimal -> 192.168.1.0 is the Network Name (NN)
+
+
+route -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         192.168.0.1     0.0.0.0         UG    600    0        0 wlp2s0  -->  Gateway
+169.254.0.0     0.0.0.0         255.255.0.0     U     1000   0        0 wlp2s0
+172.17.0.0      0.0.0.0         255.255.0.0     U     0      0        0 docker0
+192.168.0.0     0.0.0.0         255.255.255.0   U     600    0        0 wlp2s0
+
+Router is also sometimes known as Gateway, as it takes you to the outside world.
+
+
+Any system that has internet connectivity
+they have routing table
+
+route del -net 0.0.0.0
+will break the connectivity
+As, we deleted the gateway. And it takes us to the outside world.
+
+
+route add -net 0.0.0.0 gw {IP of the Modem/Router}
+It will add the entry and tells the system about "Default Gateway"
+
+
+
+Configure network
+
+Manually -->    ifconfig enp0s .2.3.4 netmask 255.255.0.0
+                route add -net 0.0.0.0 gw 1.2.3.100
+
+Automatically  -->  Dynamic
+                    DHCP Server
+                    We take the IP from the DHCP Server, by default Hotspot( works as switch,modem,router) has the DHCP Server.
+
+
