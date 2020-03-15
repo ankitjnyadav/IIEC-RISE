@@ -21,3 +21,328 @@ To run the command inside the container and come out:
 docker exec c1 date
 docker exec -it c1 bash (In this manner we can use the container and wont be exiting from it)
 i.e Container wont be shut down
+
+
+docker container run -it -d --name c3 centos
+-d is to run the container in the detached mode
+
+to check details about a container use:
+docker container c1
+
+docker rm -f ${docker ps -a -q}
+
+-----------------------------------------------------------------------
+ay@Neelkanth:/$ docker network inspect bridge
+-----------------------------------------------------------------------
+[
+    {
+        "Name": "bridge",
+        "Id": "573259f0b621dcfa7b38bcb3bd5b2ee7bb614e51e7dcd0e6037d1b82e43b2ddd",
+        "Created": "2020-03-15T09:24:58.197436682+05:30",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16",
+                    "Gateway": "172.17.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+-----------------------------------------------------------------------
+ay@Neelkanth:/$
+-----------------------------------------------------------------------
+ay@Neelkanth:/$ cat /etc/resolv.conf
+-----------------------------------------------------------------------
+> This files tell the IP address of the DHCP Server
+-----------------------------------------------------------------------
+IPAM - IP Address Management
+IPAM is kind of DB
+WHich maintains info network name, DNS name basically stores info related to your network
+-----------------------------------------------------------------------
+
+OSI Layers -
+
+Application
+Presentation
+Session
+Transport
+Network
+Data Link
+Physical
+
+
+
+Software Defined Network - SDN
+Switch works on Layer 2 (OSI Model)
+Router works on Layer 3
+
+OpenShift and Kubernetes --> Highly demanded tools
+
+-------------------------------------------------------------------------
+ay@Neelkanth:/$ docker network create --help
+-------------------------------------------------------------------------
+Usage:  docker network create [OPTIONS] NETWORK
+-------------------------------------------------------------------------
+Create a network
+-------------------------------------------------------------------------
+Options:
+      --attachable           Enable manual container attachment
+      --aux-address map      Auxiliary IPv4 or IPv6 addresses used by Network driver (default map[])
+      --config-from string   The network from which copying the configuration
+      --config-only          Create a configuration only network
+  -d, --driver string        Driver to manage the Network (default "bridge")
+      --gateway strings      IPv4 or IPv6 Gateway for the master subnet
+      --ingress              Create swarm routing-mesh network
+      --internal             Restrict external access to the network
+      --ip-range strings     Allocate container ip from a sub-range
+      --ipam-driver string   IP Address Management Driver (default "default")
+      --ipam-opt map         Set IPAM driver specific options (default map[])
+      --ipv6                 Enable IPv6 networking
+      --label list           Set metadata on a network
+  -o, --opt map              Set driver specific options (default map[])
+      --scope string         Control the network's scope
+      --subnet strings       Subnet in CIDR format that represents a network segment
+-------------------------------------------------------------------------
+ay@Neelkanth:/$
+-------------------------------------------------------------------------
+ay@Neelkanth:/$ docker network create --driver bridge net1
+e15c88b9d56a3ed8dab110a1185b93d7d3689023e85a872503e21f03c56da64a
+-------------------------------------------------------------------------
+ay@Neelkanth:/$ docker network ls
+-------------------------------------------------------------------------
+NETWORK ID          NAME                DRIVER              SCOPE
+573259f0b621        bridge              bridge              local
+f86ec83077c3        host                host                local
+e15c88b9d56a        net1                bridge              local
+89473fe68647        none                null                local
+-------------------------------------------------------------------------
+ay@Neelkanth:/$ docker network inspect net1
+-------------------------------------------------------------------------
+[
+    {
+        "Name": "net1",
+        "Id": "e15c88b9d56a3ed8dab110a1185b93d7d3689023e85a872503e21f03c56da64a",
+        "Created": "2020-03-15T15:39:25.135205913+05:30",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+-------------------------------------------------------------------------
+ay@Neelkanth:/$ docker run -dit --name c8 --network net1 vimal13/webserver:v1
+-------------------------------------------------------------------------
+deece775131826aa80d79797aa3f9751373a4eff9510eab67b10056beb9710d5
+-------------------------------------------------------------------------
+[root@6995af404a0b /]# ping c8              (Inside C9)
+-------------------------------------------------------------------------
+PING c8 (172.18.0.2) 56(84) bytes of data.
+64 bytes from c8.net1 (172.18.0.2): icmp_seq=1 ttl=64 time=0.211 ms
+64 bytes from c8.net1 (172.18.0.2): icmp_seq=2 ttl=64 time=0.197 ms
+64 bytes from c8.net1 (172.18.0.2): icmp_seq=3 ttl=64 time=0.155 ms
+64 bytes from c8.net1 (172.18.0.2): icmp_seq=4 ttl=64 time=0.147 ms
+64 bytes from c8.net1 (172.18.0.2): icmp_seq=5 ttl=64 time=0.179 ms
+^C
+--- c8 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4094ms
+rtt min/avg/max/mdev = 0.147/0.177/0.211/0.029 ms
+-------------------------------------------------------------------------
+[root@6995af404a0b /]#
+-------------------------------------------------------------------------
+
+Internally the linking is done using the Name, as IP addresses are very dynamic in nature.
+
+
+In order to do linking between two container, we can do:
+-------------------------------------------------------------------------
+ay@Neelkanth:/$ docker run -it --link c1 --name c10 vimal13/webserver:v1
+-------------------------------------------------------------------------
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.17.0.4. Set the 'ServerName' directive globally to suppress this message
+[root@b935f8b8b839 /]# ifconfig
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.17.0.4  netmask 255.255.0.0  broadcast 172.17.255.255
+        ether 02:42:ac:11:00:04  txqueuelen 0  (Ethernet)
+        RX packets 23  bytes 2822 (2.7 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+-------------------------------------------------------------------------
+[root@b935f8b8b839 /]# ping 172.17.0.2
+-------------------------------------------------------------------------
+PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.
+64 bytes from 172.17.0.2: icmp_seq=1 ttl=64 time=0.273 ms
+64 bytes from 172.17.0.2: icmp_seq=2 ttl=64 time=0.165 ms                                                                                                                                                                                       64 bytes from 172.17.0.2: icmp_seq=6 ttl=64 time=0.146 ms
+^C
+--- 172.17.0.2 ping statistics ---
+6 packets transmitted, 6 received, 0% packet loss, time 5125ms
+rtt min/avg/max/mdev = 0.137/0.172/0.273/0.046 ms
+-------------------------------------------------------------------------
+[root@b935f8b8b839 /]# ping c1
+-------------------------------------------------------------------------
+PING c1 (172.17.0.2) 56(84) bytes of data.
+64 bytes from c1 (172.17.0.2): icmp_seq=1 ttl=64 time=0.175 ms
+64 bytes from c1 (172.17.0.2): icmp_seq=2 ttl=64 time=0.142 ms
+^C
+--- c1 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1032ms
+rtt min/avg/max/mdev = 0.142/0.158/0.175/0.020 ms
+-------------------------------------------------------------------------
+[root@b935f8b8b839 /]#
+-------------------------------------------------------------------------
+
+When there is a requirement to create a container you dont need to connect your container with any network, use:
+-------------------------------------------------------------------------
+ay@Neelkanth:/$ docker run -it --network none --name c1 vimal13/webserver:v1
+-------------------------------------------------------------------------
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 127.0.0.2. Set the 'ServerName' directive globally to suppress this message
+[root@7367aa602517 /]#
+-------------------------------------------------------------------------
+
+
+
+When you want to disconnect your container from the network:
+-------------------------------------------------------------------------
+ay@Neelkanth:/$ docker network disconnect
+-------------------------------------------------------------------------
+"docker network disconnect" requires exactly 2 arguments.
+See 'docker network disconnect --help'.
+
+Usage:  docker network disconnect [OPTIONS] NETWORK CONTAINER
+
+Disconnect a container from a network
+-------------------------------------------------------------------------
+ay@Neelkanth:/$ docker network disconnect net1 c1
+-------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------
+To connect back?
+-------------------------------------------------------------------------
+ay@Neelkanth:/$ docker network connect bridge c1
+-------------------------------------------------------------------------
+Connected but changed the network from net1 to bridge
+Basically changed the local network
+-------------------------------------------------------------------------
+
+
+To balance the load
+we can do the load balancing using: (Using round robin)
+-------------------------------------------------------------------------
+
+-------------------------------------------------------------------------
+cd /var/www/html
+vi html.php
+-------------------------------------------------------------------------
+<?php
+print("Welcome AY!");
+print("\n");
+print `ifconfig`;
+?>
+~
+-------------------------------------------------------------------------
+[root@44b5e3b010f8 sbin]# /usr/sbin/httpd
+-------------------------------------------------------------------------
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+httpd (pid 136) already running
+-------------------------------------------------------------------------
+[root@44b5e3b010f8 sbin]# netstat -tnlp
+-------------------------------------------------------------------------
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      136/httpd
+-------------------------------------------------------------------------
+[root@44b5e3b010f8 html]# vi /root/.bashrc
+-------------------------------------------------------------------------
+# .bashrc
+
+# User specific aliases and functions
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+rm -rf /var/run/httpd/*
+/usr/sbin/httpd
+~
+~
+~
+-------------------------------------------------------------------------
+docker commit web phpweb
+-------------------------------------------------------------------------
+docker run -it --name c1 phpweb
+docker run -it --name c2 phpweb
+docker run -it --name c3 phpweb
+-------------------------------------------------------------------------
+172.17.0.2/index.php
+172.17.0.3/index.php
+172.17.0.4/index.php
+-------------------------------------------------------------------------
+
+Everything customized by now:
+docker container run -it --name web1 --network webnet phpweb
+-------------------------------------------------------------------------
+docker container run -it --name web2 --network webnet phpweb
+-------------------------------------------------------------------------
+ay@Neelkanth:/$ docker container run -it --name client1 --network webnet centos
+-------------------------------------------------------------------------
+Inside Client we can do:
+-------------------------------------------------------------------------
+curl web1
+curl web2
+-------------------------------------------------------------------------
+But we want to hit one IP and sever to automatically resolve it and do the load balancing
+
