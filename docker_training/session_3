@@ -346,3 +346,94 @@ curl web2
 -------------------------------------------------------------------------
 But we want to hit one IP and sever to automatically resolve it and do the load balancing
 
+
+-------------------------------------------------------------------------
+ay@Neelkanth:/$ nslookup www.google.cm
+Server:         127.0.0.53
+Address:        127.0.0.53#53
+-------------------------------------------------------------------------
+Non-authoritative answer:
+Name:   www.google.cm
+Address: 172.217.160.163
+Name:   www.google.cm
+Address: 2404:6800:4009:80a::2003
+-------------------------------------------------------------------------
+ay@Neelkanth:/$ host www.google.com
+www.google.com has address 216.58.196.68
+www.google.com has IPv6 address 2404:6800:4009:809::2004
+-------------------------------------------------------------------------
+
+ay@Neelkanth:/$ docker container run -it --name w1 --network-alias site --network webnet phpweb
+ay@Neelkanth:/$ docker container run -it --name w2 --network-alias site --network webnet phpweb
+-------------------------------------------------------------------------
+[root@371647420f35 /]# ping site
+-------------------------------------------------------------------------
+PING site (172.19.0.5) 56(84) bytes of data.
+64 bytes from w1.webnet (172.19.0.5): icmp_seq=1 ttl=64 time=0.169 ms
+64 bytes from w1.webnet (172.19.0.5): icmp_seq=2 ttl=64 time=0.150 ms
+^C
+--- site ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 25ms
+rtt min/avg/max/mdev = 0.144/0.154/0.169/0.014 ms
+-------------------------------------------------------------------------
+[root@371647420f35 /]# ping site
+-------------------------------------------------------------------------
+PING site (172.19.0.6) 56(84) bytes of data.
+64 bytes from w2.webnet (172.19.0.6): icmp_seq=1 ttl=64 time=0.080 ms
+64 bytes from w2.webnet (172.19.0.6): icmp_seq=2 ttl=64 time=0.151 ms
+^C
+--- site ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 11ms
+rtt min/avg/max/mdev = 0.080/0.115/0.151/0.037 ms
+-------------------------------------------------------------------------
+[root@371647420f35 /]#
+-------------------------------------------------------------------------
+
+Imp: Linking works inside personal network.
+-------------------------------------------------------------------------
+
+
+To find package from yum
+-------------------------------------------------------------------------
+[root@371647420f35 /]# yum whatprovides nslookup
+-------------------------------------------------------------------------
+Failed to set locale, defaulting to C.UTF-8
+CentOS-8 - AppStream                                                                                                                                                                                                              166 kB/s | 6.5 MB     00:40
+CentOS-8 - Base                                                                                                                                                                                                                   2.4 MB/s | 5.0 MB     00:02
+CentOS-8 - Extras                                                                                                                                                                                                                 2.7 kB/s | 2.1 kB     00:00
+bind-utils-32:9.11.4-26.P2.el8.x86_64 : Utilities for querying DNS name servers
+Repo        : AppStream
+Matched from:
+Filename    : /usr/bin/nslookup
+-------------------------------------------------------------------------
+[root@371647420f35 /]# nslookup w1
+Server:         127.0.0.11
+Address:        127.0.0.11#53
+
+Non-authoritative answer:
+Name:   w1
+Address: 172.19.0.5
+-------------------------------------------------------------------------
+[root@371647420f35 /]# nslookup w2
+Server:         127.0.0.11
+Address:        127.0.0.11#53
+
+Non-authoritative answer:
+Name:   w2
+Address: 172.19.0.6
+-------------------------------------------------------------------------
+[root@371647420f35 /]# nslookup site
+Server:         127.0.0.11
+Address:        127.0.0.11#53
+
+Non-authoritative answer:
+Name:   site
+Address: 172.19.0.6
+Name:   site
+Address: 172.19.0.5
+-------------------------------------------------------------------------
+
+PS:
+OpenShift -->  Kubernetes  -->  Docker
+To excel in career improve skills in OpenShift!
+-------------------------------------------------------------------------
