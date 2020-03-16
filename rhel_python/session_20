@@ -2,3 +2,33 @@
 RISE ID: 2020.41.2.1
 ---------------------
 
+Remaining of SSH topic
+ssh -l root 172.20.10.13
+
+ay@Neelkanth:/$ w
+ 22:38:16 up 14 min,  2 users,  load average: 10.94, 8.35, 4.66
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+ay       :0       :0               22:34   ?xdm?   6:00   0.05s /usr/lib/gdm3/gdm-x-session --run-script env GNOME_SHELL_SESSION_MODE=ubuntu gnome-session --session=ubuntu
+ay       tty5     -                22:33    4:08   0.31s  0.23s -bash
+ay@Neelkanth:/$ echo $DISPLAY
+:0
+
+
+ay@Neelkanth:/$ DISPLAY=:1
+ay@Neelkanth:/$ echo $DISPLAY
+:1
+ay@Neelkanth:/$ export DISPLAY=:1
+
+ay@Neelkanth:~$ firefox
+Error: no DISPLAY environment variable specified
+
+X-server is server which runs GUI programs
+Prevents outsiders to access GUI
+
+ay@Neelkanth:~$ xhost
+access control enabled, only authorized clients can connect
+SI:localuser:ay
+
+ay@Neelkanth:~$ xhost
+access control enabled, only authorized clients can connect
+SI:localuser:ay
