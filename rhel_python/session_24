@@ -1,0 +1,84 @@
+---------------------
+RISE ID: 2020.41.2.1
+---------------------
+
+import os
+os.system("tput setaf 1")
+print("-"*80)
+
+def menu():
+    print("\t\t\t Welcome to our TUI, that makes life simple")
+    os.system("tput setaf 0")
+    print("-" * 80)
+    print('''    Press 1: To See Date
+    Press 2: To check cal
+    Press 3: To Configure Web Server
+    Press 4: To Create file
+    Press 5: To Create Usertouch
+    Press 6: To configure n/w
+    Press 7: To Exit!''')
+    print("-" * 80)
+    print('Please Enter your choice:', end=' ')
+    choice = int(input())
+    return choice
+
+def remote_choice_menu(choice):
+    print("-" * 80, end='\n')
+    remote_ip = input('Enter the IP Address of machine you want to enter:')
+    print("-" * 80, end='\n')
+    if os.system('ping {}'.format(remote_ip)):
+        if choice == 1:
+            os.system("ssh {} date".format(remote_ip))
+        elif choice == 2:
+            os.system("ssh {} cal".format(remote_ip))
+        elif choice == 3:
+            os.system("ssh {} yum install httpd".format(remote_ip))
+        elif choice == 4:
+            print('Choice 4')
+        elif choice == 5:
+            user_name = input('Enter the username: ')
+            os.system("ssh {} useradd {}".format(remote_ip, user_name))
+        elif choice == 6:
+            os.system("ssh {} date".format(remote_ip))
+        elif choice == 7:
+           exit()
+        else:
+            print('Option not available')
+        print("-" * 80, end='\n')
+
+def local_choice_menu(choice):
+    print("-" * 80, end='\n')
+    if choice == 1:
+        os.system("date")
+    elif choice == 2:
+        os.system("cal")
+    elif choice == 3:
+        os.system("yum install httpd")
+    elif choice == 4:
+        print('Choice 4')
+    elif choice == 5:
+        user_name = input('Enter the username: ')
+        os.system("useradd {}".format(user_name))
+    elif choice == 6:
+        os.system("date")
+    elif choice == 7:
+        exit()
+    else:
+        print('Option not available')
+    print("-" * 80, end='\n')
+
+while True:
+    print("-" * 80, end='\n')
+    choice = menu()
+    input_choice = input('You would like to perform your job locally/remotely?:')
+    if input_choice=='locally' or input_choice=='local':
+        local_choice_menu(choice)
+    elif input_choice=='remote':
+        remote_choice_menu(choice)
+    elif input_choice=='exit':
+        exit()
+    else:
+        print('Location not supported')
+    input('Enter to continue ...')
+    os.system('clear')
+
