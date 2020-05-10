@@ -1,0 +1,26 @@
+---------------------
+RISE ID: 2020.41.2.1
+---------------------
+
+ay@Neelkanth:/$ docker info
+Client:
+ Debug Mode: false
+
+Server:
+ Containers: 5
+  Running: 0
+  Paused: 0
+  Stopped: 5
+ Images: 5
+ Server Version: 19.03.8
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+WARNING: No swap limit support
+(base) ay@Neelkanth:/$
+
+
+To search in the command for specific keyword like IP
+docker inspect eager_rosalind | grep IP
