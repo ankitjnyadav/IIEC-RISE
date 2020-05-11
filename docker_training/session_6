@@ -1,0 +1,16 @@
+---------------------
+RISE ID: 2020.41.2.1
+---------------------
+
+Docker File @ /docker_training/Dockerfile
+/home/ay/Documents/AtomProjects/iiec_rise/docker_training
+
+docker build -t image_name:version docker_file_path
+If in the same folder:  docker build -t image_name:version .
+
+
+docker history image_name
+
+(base) ay@Neelkanth:~/Documents/AtomProjects/iiec_rise/docker_training$ docker run -it rise:v2 date
+Sun May 10 14:39:11 UTC 2020
+
