@@ -1,0 +1,10 @@
+---------------------
+RISE ID: 2020.41.2.1
+---------------------
+No way to delete files permanently technically
+Shred tools also cant gaurantee 100% removal
+Inode Table is like Indexes in books
+File System/Format (FAT, NTFS etc.)
+When we delete a file, entry from inode table gets removed and data remains
+reformat means new inode index page
+user cant access partition directly but we have access to folder and by m
