@@ -1,0 +1,26 @@
+---------------------
+RISE ID: 2020.41.2.1
+---------------------
+
+Redhat CLI Installation
+NAS - Network Attached Storage
+
+NFS - Network File System
+
+
+Setup Server:
+1. Install
+2. Configure
+3. Start Service
+
+Sharing is also known as Export
+
+Mount
+Yum configuration in CLI
+To mount permanently - /etc/rc.d/rc.local/
+
+chrony
+NTP - Network Time Protocol
+
+systemctl restart chronyd
+chronyc sources
