@@ -1,0 +1,57 @@
+---------------------
+RISE ID: 2020.41.2.1
+---------------------
+Logs
+Metrics
+
+--------
+Log is meant for troubleshooting
+Log for real time monitoring
+Log is also used for analytics
+--------
+
+tail /var/log/secure
+tail /var/log/syslog
+tail -2 /var/log/secure
+
+Space is delimiter in between in two Information.
+Also known as "field separator"
+
+cat access_log | cut -d" " -f1
+-d -> is delimiter
+
+cat access_log | cut -d" " -f1 | sort
+
+cat /var/log/syslog | grep "Failed password for root"
+cat /var/log/syslog | grep "Failed password for root" | wc -l
+
+
+Metrics
+
+RSS | resident set size - is the portion of memory occupied by a process that is held in main memory (RAM)
+
+cmd: top
+z -> change color
+c -> top cpu consuming processes
+d -> to change the default time
+
+top -n 1 > outfile
+
+for i in `pgrep firefox`; do ps -o rss $i; done
+for i in `pgrep firefox`; do ps -o rss,%cpu $i; done
+for i in `pgrep firefox`; do ps -o rss,%cpu,comm $i; done
+
+lsof -> List of Open Files
+lsof
+lsof -u ay
+
+To get all the port no. attached to service
+netstat -tnlp -> T for TCP
+netstat -unlp -> U for UDP
+
+netstat -nct
+To see who all are conneced to us.
+
+
+Metric - I conclude why its slow
+Log - And how to solve
