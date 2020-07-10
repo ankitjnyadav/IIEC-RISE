@@ -1,0 +1,15 @@
+---------------------
+RISE ID: 2020.41.2.1
+---------------------
+
+Importance of slash (/) directory
+How to extend and reduce the size of partition
+How to transfer storage from one LV to another
+About LVM
+Methods to reduce LV
+ 1 Unmount/offline
+   2 clean/scan
+   3 format
+   4 LV reduce
+   5 mount
+About unmount
